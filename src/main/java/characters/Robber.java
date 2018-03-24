@@ -1,4 +1,4 @@
-package characters;
+package main.java.characters;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -22,7 +22,7 @@ public class Robber {
             }
         }
 
-        System.out.println("Type the first name of the player you want to exchange cards with: ");
+        System.out.println("Hello Robber. Type the first name of the player you want to exchange cards with: ");
         String player = reader.next();
         Characters role = finalRoles.get(player);
 

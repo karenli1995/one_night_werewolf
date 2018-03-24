@@ -1,4 +1,4 @@
-package characters;
+package main.java.characters;
 
 import java.util.Map;
 import java.util.Scanner;

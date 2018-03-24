@@ -1,4 +1,4 @@
-package characters;
+package main.java.characters;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -11,7 +11,7 @@ public class Doppelganger {
     private Map<String, Characters> assignedRoles;
     private Map<String, Characters> updatedRoles;
     private Characters[] myInitMiddleCards;
-    private Characters[] myUpdatedMiddleCards; //TODO: set by Drunk
+    private Characters[] myUpdatedMiddleCards; //set by Drunk
     
     private Scanner myScanner;
     
@@ -20,7 +20,7 @@ public class Doppelganger {
         this.updatedRoles = assignedRoles;
         this.myInitMiddleCards = middlecards;
         this.myUpdatedMiddleCards = middlecards;
-        System.out.println("Doppelgänger, wake up and look at another player’s card. You are now that role. "
+        System.out.println("Doppelgï¿½nger, wake up and look at another playerï¿½s card. You are now that role. "
                 + "If your new role has a night action, do it now.");
         
         myScanner = scanner;

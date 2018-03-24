@@ -1,11 +1,11 @@
-package characters;
+package main.java.characters;
 
 import java.util.Map;
 import java.util.Random;
 
 public class Werewolf {
     public void seeWerewolves(Map<String, Characters> roles, Characters[] middlecards, boolean isDoppelganger) {
-        System.out.println("Werewolf Players: ");
+        System.out.println("Hello Werewolves. Here are the other Werewolf Players: ");
         int numWerewolvesAssigned = 0;
         if (!isDoppelganger) {
         for (String name : roles.keySet()) {

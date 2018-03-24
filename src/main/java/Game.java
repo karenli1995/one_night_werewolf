@@ -1,21 +1,22 @@
-package main;
+package main.java;
 import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
 
-import characters.Characters;
-import players.MixUpCards;
-import players.SetUpPlayers;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import main.java.characters.Characters;
+import main.java.players.MixUpCards;
+import main.java.players.SetUpPlayers;
+
+@SpringBootApplication
 public class Game {
 
     public static void main(String[] args) {
         
         SetUpPlayers setup = new SetUpPlayers();
         
-        int numPlayers = setup.chooseCharacters();
+        setup.chooseCharacters();
         Characters[] middlecards = setup.chooseMiddleCards();
-        Map<String, Characters> assignments = setup.assignPlayers(numPlayers);
+        Map<String, Characters> assignments = setup.assignPlayers();
         
         //TODO: delete
         System.out.println("Initial Assignments: " + assignments.toString());

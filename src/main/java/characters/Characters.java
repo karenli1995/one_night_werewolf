@@ -1,4 +1,4 @@
-package characters;
+package main.java.characters;
 
 public enum Characters {
     WEREWOLF1,

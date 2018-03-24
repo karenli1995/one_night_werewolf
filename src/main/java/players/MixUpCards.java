@@ -1,4 +1,4 @@
-package players;
+package main.java.players;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -7,23 +7,23 @@ import java.util.Optional;
 import java.util.Scanner;
 import java.util.Set;
 
-import characters.Characters;
-import characters.Doppelganger;
-import characters.Drunk;
-import characters.Insomniac;
-import characters.Mason;
-import characters.Minion;
-import characters.Robber;
-import characters.Seer;
-import characters.Troublemaker;
-import characters.Werewolf;
+import main.java.characters.Characters;
+import main.java.characters.Doppelganger;
+import main.java.characters.Drunk;
+import main.java.characters.Insomniac;
+import main.java.characters.Mason;
+import main.java.characters.Minion;
+import main.java.characters.Robber;
+import main.java.characters.Seer;
+import main.java.characters.Troublemaker;
+import main.java.characters.Werewolf;
 
 public class MixUpCards {
     
     private Set<Characters> charsInPlay;
     
     private Map<String, Characters> initAssignments;
-    private Map<String, Characters> finalAssignments = new HashMap<String, Characters>();
+    private Map<String, Characters> finalAssignments;
     
     private Characters[] middlecards;
     private Characters[] updatedMiddleCards;
@@ -36,6 +36,7 @@ public class MixUpCards {
         }
         this.middlecards = middlecards;
         
+        finalAssignments = new HashMap<String, Characters>();
         for (String player : initAssignments.keySet()) {
             finalAssignments.put(player, initAssignments.get(player));
         }
@@ -85,13 +86,13 @@ public class MixUpCards {
         } 
         if (charsInPlay.contains(Characters.ROBBER)) {
             Robber r = new Robber();
-            finalAssignments = r.exchangeWithAnotherPlayer(initAssignments, finalAssignments, false, scanner); //update roles TODO
+            finalAssignments = r.exchangeWithAnotherPlayer(initAssignments, finalAssignments, false, scanner);
             System.out.println(initAssignments);
 
         } 
         if (charsInPlay.contains(Characters.TROUBLEMAKER)) {
             Troublemaker t = new Troublemaker();
-            finalAssignments = t.exchangeCards(finalAssignments, scanner); //update roles TODO
+            finalAssignments = t.exchangeCards(finalAssignments, scanner);
             System.out.println("Troublemaker: " + finalAssignments);
             System.out.println(initAssignments);
 
