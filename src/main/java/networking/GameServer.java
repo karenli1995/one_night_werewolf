@@ -10,7 +10,8 @@ import main.java.characters.Characters;
 import main.java.controller.MVCController;
 
 public class GameServer {
-	private static int PORT = Integer.valueOf(System.getenv("PORT"));
+	private static int PORT = 8901;
+//	private static int PORT = Integer.valueOf(System.getenv("PORT"));
 
 	private MVCController myController;
 	
@@ -27,7 +28,6 @@ public class GameServer {
         
         List<Player> allPlayers = new ArrayList<Player>();
         
-//    	ServerSocket listener = new ServerSocket(8901);
     	ServerSocket listener = new ServerSocket(PORT);
         System.out.println("Werewolf Server is Running");
         try {

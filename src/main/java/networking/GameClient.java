@@ -37,7 +37,7 @@ public class GameClient {
 	private Map<String, Card> playerCards;
 	private Card[] middleCards;
 
-	private static int PORT = Integer.valueOf(System.getenv("PORT"));
+	private static int PORT = 8901;
 	private Socket socket;
 	private BufferedReader in;
 	private PrintWriter out;

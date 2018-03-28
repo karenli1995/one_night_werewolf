@@ -6,6 +6,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,6 +24,7 @@ import javafx.scene.Node;
 import javafx.scene.paint.Color;
 
 import javafx.stage.Stage;
+import javafx.util.Pair;
 import main.java.characters.Characters;
 import main.java.controller.MVCController;
 import main.java.networking.GameClient;
@@ -65,7 +68,7 @@ public class StartGUI {
 		Menu menu = new Menu("File");
 		myConnectMenuItem = new MenuItem("Connect to Game");
 		myConnectMenuItem.setDisable(true);
-		myConnectMenuItem.setOnAction(connectGame());
+		connectGame();
 		
 		menu.getItems().add(myConnectMenuItem);
 		myMenuBar.prefWidthProperty().bind(stage.widthProperty());
@@ -95,11 +98,25 @@ public class StartGUI {
 	}
 	
 	
-	private EventHandler<ActionEvent> connectGame() throws Exception {
-		while (true) {
-            GameClient client = new GameClient(myServerAddress, myStage, myController);
-            client.play();
-        }
+	private void connectGame() {
+		myConnectMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				while (true) {
+		            GameClient client = null;
+					try {
+						client = new GameClient(myServerAddress, myStage, myController);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+		            try {
+						client.play();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+		        }
+			}
+		});
 	}
 
 
