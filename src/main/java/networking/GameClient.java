@@ -37,7 +37,7 @@ public class GameClient {
 	private Map<String, Card> playerCards;
 	private Card[] middleCards;
 
-	private static int PORT = 8901;
+	private static int PORT = Integer.valueOf(System.getenv("PORT"));
 	private Socket socket;
 	private BufferedReader in;
 	private PrintWriter out;
@@ -50,8 +50,6 @@ public class GameClient {
 	private Button mySwitchBtn, myFinishBtn;
 	private int myWindowWidth, myWindowHeight;
 
-	private MVCController myController;
-
 	private String currPlayer;
 
 	/**
@@ -60,11 +58,9 @@ public class GameClient {
 	 */
 	public GameClient(String serverAddress, Stage stage, MVCController controller) throws Exception {
 		Map<String, Characters> initAssignments = controller.getInitAssignments();
-		int i = 0;
 		for (String player : initAssignments.keySet()) {
 			Card card = new Card(player, initAssignments.get(player));
 			playerCards.put(player, card);
-			i++;
 		}
 
 		Characters[] initMiddleCards = controller.getMiddleCards();
