@@ -13,9 +13,7 @@ import java.util.Set;
 
 import main.java.characters.Characters;
 
-public class SetUpPlayers {
-    private Scanner myScanner = new Scanner(System.in);
-    
+public class SetUpPlayers {    
     private int myNumPlayers = 0;
     
     private List<Characters> allCharacters = Arrays.asList(Characters.WEREWOLF1, Characters.WEREWOLF2, Characters.SEER,
@@ -31,22 +29,24 @@ public class SetUpPlayers {
     private Set<Characters> charactersInGame = new HashSet<Characters>();
     
     public SetUpPlayers() {
+    	
+    }
+    
+    public SetUpPlayers(String[] playerNames, List<Integer> chars) {
         
     }
 
-    public void chooseCharacters() {
-        //set num players
-        System.out.println("Enter number of players: ");
-        myNumPlayers = myScanner.nextInt();
+    public void chooseCharacters(String[] playerNames, List<Integer> chars) {
+        myNumPlayers = playerNames.length;
 
         System.out.println("Enter the numbers of players you wish to use separated by a single space between each. \n"
                 + "(1) Werewolf1 (2) Werewolf2 (3) Seer (4) Robber (5) Troublemaker (6) Tanner \n"
                 + "(7) Drunk (8) Hunter (9) Mason1 (10) Mason2 (11) Insomniac (12) Minion \n"
                 + "(13) Doppelganger (14) Villager1 (15) Villager2 (16) Villager3 \n"
                 + "(For example, enter 1 5 8 9 2): ");
-        int i = 0;
-        while (i < myNumPlayers + 3) {
-            int n = myScanner.nextInt() - 1;
+
+        for (int i=0; i < chars.size(); i++){
+            int n = chars.get(i);
             //check that it is num between 1-size(allCharacters)
             chosenCharacters.add(allCharacters.get(n));
             charactersInGame.add(allCharacters.get(n));
@@ -55,7 +55,7 @@ public class SetUpPlayers {
         System.out.println(chosenCharacters);
     }
     
-    public Characters[] chooseMiddleCards() {
+    public void chooseMiddleCards() {
         middleCards = new Characters[3];
         int i = 0;
         while (i < 3) {
@@ -64,28 +64,28 @@ public class SetUpPlayers {
             middleCards[i] = chosenCharacters.get(n);
             chosenCharacters.remove(n);
             i++;
-        }
-        return middleCards;
-        
+        }        
     }
 
-    public Map<String, Characters> assignPlayers() {
+    public void assignPlayers(String[] playerNames) {
         Collections.shuffle(chosenCharacters);
         int j = 0;
         while (j < myNumPlayers) {
-            System.out.println("Enter first name of Player " + j + ": ");
-            String player = myScanner.next();
+        	String player = playerNames[j];
             roleAssignments.put(player, chosenCharacters.get(j));
             j++;
         }
-        return roleAssignments;
+    }
+    
+    public Characters[] getMiddleCards() {
+    	return middleCards;
+    }
+    
+    public Map<String, Characters> getInitAssignments() {
+    	return roleAssignments;
     }
     
     public Set<Characters> getAllCharactersInGame() {
         return charactersInGame;
-    }
-    
-    public Scanner getScanner() {
-        return myScanner;
     }
 }

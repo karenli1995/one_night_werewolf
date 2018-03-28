@@ -20,7 +20,7 @@ public class Doppelganger {
         this.updatedRoles = assignedRoles;
         this.myInitMiddleCards = middlecards;
         this.myUpdatedMiddleCards = middlecards;
-        System.out.println("Doppelg�nger, wake up and look at another player�s card. You are now that role. "
+        System.out.println("Doppelganger, wake up and look at another players card. You are now that role. "
                 + "If your new role has a night action, do it now.");
         
         myScanner = scanner;
