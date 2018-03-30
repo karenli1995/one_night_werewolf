@@ -11,32 +11,44 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import org.springframework.stereotype.Component;
+
 import main.java.characters.Characters;
 
+@Component
 public class SetUpPlayers {    
-    private int myNumPlayers = 0;
+    private int myNumPlayers;
     
-    private List<Characters> allCharacters = Arrays.asList(Characters.WEREWOLF1, Characters.WEREWOLF2, Characters.SEER,
-            Characters.ROBBER, Characters.TROUBLEMAKER, Characters.TANNER, Characters.DRUNK, Characters.HUNTER,
-            Characters.MASON1, Characters.MASON2, Characters.INSOMNIAC, Characters.MINION, Characters.DOPPELGANGER,
-            Characters.VILLAGER1, Characters.VILLAGER2, Characters.VILLAGER3);
-    private List<Characters> chosenCharacters = new ArrayList<Characters>();
+    private List<Characters> allCharacters;
+    private List<Characters> chosenCharacters;
 
-    private Map<String, Characters> roleAssignments = new HashMap<String, Characters>();
+    private Map<String, Characters> roleAssignments;
     
     private Characters[] middleCards;
-    
-    private Set<Characters> charactersInGame = new HashSet<Characters>();
-    
+        
     public SetUpPlayers() {
-    	
+        myNumPlayers = 0;
+        
+        allCharacters = Arrays.asList(Characters.WEREWOLF1, Characters.WEREWOLF2, Characters.SEER,
+                Characters.ROBBER, Characters.TROUBLEMAKER, Characters.TANNER, Characters.DRUNK, Characters.HUNTER,
+                Characters.MASON1, Characters.MASON2, Characters.INSOMNIAC, Characters.MINION, Characters.DOPPELGANGER,
+                Characters.VILLAGER1, Characters.VILLAGER2, Characters.VILLAGER3);
+        
+        chosenCharacters = new ArrayList<Characters>();
+        roleAssignments = new HashMap<String, Characters>();
     }
     
     public SetUpPlayers(String[] playerNames, List<Integer> chars) {
         
     }
 
-    public void chooseCharacters(String[] playerNames, List<Integer> chars) {
+    public void chooseCharacters(String[] playerNames, String[] chars) {
+        int[] initRoles = new int[chars.length];
+        for(int j=0; j<initRoles.length; j++) {
+            initRoles[j] = Integer.parseInt(chars[j]);
+        }
+        System.out.println("YO" + initRoles);
+        
         myNumPlayers = playerNames.length;
 
         System.out.println("Enter the numbers of players you wish to use separated by a single space between each. \n"
@@ -45,14 +57,20 @@ public class SetUpPlayers {
                 + "(13) Doppelganger (14) Villager1 (15) Villager2 (16) Villager3 \n"
                 + "(For example, enter 1 5 8 9 2): ");
 
-        for (int i=0; i < chars.size(); i++){
-            int n = chars.get(i);
+        int i = 0;
+        while (i < myNumPlayers + 3) {
+            int n = initRoles[i] - 1;
             //check that it is num between 1-size(allCharacters)
             chosenCharacters.add(allCharacters.get(n));
-            charactersInGame.add(allCharacters.get(n));
             i++;
         }
-        System.out.println(chosenCharacters);
+        
+//        for (int i=0; i < initRoles.length; i++){
+//            int n = initRoles[i] - 1;
+//            //check that it is num between 1-size(allCharacters)
+//            chosenCharacters.add(allCharacters.get(n));
+//        }
+        System.out.println("HI" + chosenCharacters);
     }
     
     public void chooseMiddleCards() {
@@ -85,7 +103,7 @@ public class SetUpPlayers {
     	return roleAssignments;
     }
     
-    public Set<Characters> getAllCharactersInGame() {
-        return charactersInGame;
-    }
+//    public Set<Characters> getAllCharactersInGame() {
+//        return charactersInGame;
+//    }
 }

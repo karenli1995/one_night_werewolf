@@ -6,22 +6,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import main.java.characters.Characters;
-import main.java.controller.MVCController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import main.java.characters.Characters;
+import main.java.controller.BackendController;
+import main.java.players.Player;
+
+@Component
 public class GameServer {
 	private static int PORT = 8901;
 //	private static int PORT = Integer.valueOf(System.getenv("PORT"));
 
-	private MVCController myController;
+	@Autowired
+	private BackendController myController;
 	
 	private Map<String, Characters> myInitAssignments;
 	private Characters[] myInitMiddleCards;
 	
-	public GameServer(MVCController controller) throws IOException {
+	public GameServer(BackendController controller) throws IOException {
 		myController = controller;
-		
-		myInitAssignments = myController.getInitAssignments();
+		startServer();
+    }
+
+    public void startServer() throws IOException {
+        myInitAssignments = myController.getInitAssignments();
 		myInitMiddleCards = myController.getMiddleCards();
 		
         System.out.println("Starting game...");

@@ -26,8 +26,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import main.java.characters.Characters;
-import main.java.controller.MVCController;
-import main.java.networking.GameClient;
+import main.java.controller.BackendController;
+import main.java.networking.GameClient2;
 import main.java.networking.GameServer;
 import main.java.players.SetUpPlayers;
 
@@ -46,11 +46,11 @@ public class StartGUI {
 	
 	private TextField myNamesTf, myRolesTf;
 	
-	private MVCController myController;
+	private BackendController myController;
 
 	public StartGUI(Stage stage) throws Exception {
 		myStage = stage;
-		myController = new MVCController();
+		myController = new BackendController();
 		
 		Scene scene = init((int)stage.getWidth(), (int)stage.getHeight());
 		stage.setScene(scene);
@@ -84,6 +84,9 @@ public class StartGUI {
 		hb.getChildren().addAll(label1, myNamesTf);
 		hb.setSpacing(10);
 		
+		myVBox.setLayoutX(30);
+		myVBox.setLayoutY(30);
+		
 		myVBox.getChildren().add(hb);
 	}
 	
@@ -103,9 +106,9 @@ public class StartGUI {
 			@Override
 			public void handle(ActionEvent event) {
 				while (true) {
-		            GameClient client = null;
+		            GameClient2 client = null;
 					try {
-						client = new GameClient(myServerAddress, myStage, myController);
+						client = new GameClient2(myServerAddress, myStage, myController);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -129,24 +132,27 @@ public class StartGUI {
 		addRoles(); 
 		
 		Button startGameBtn = new Button("Start Game");
+		startGameBtn.setLayoutX(40);
+		startGameBtn.setLayoutY(100);
 		myRoot.getChildren().add(startGameBtn);
 
-		startGameBtn.setOnAction(new EventHandler<ActionEvent>() {
+		startGameBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(ActionEvent event) {
+            public void handle(MouseEvent event) {
             	String[] names = myNamesTf.getText().split(" ");
             	String[] roles = myRolesTf.getText().split(" ");
-            	List<Integer> intRoles= new ArrayList<Integer>();
+            	List<Integer> initRoles= new ArrayList<Integer>();
             	for(String num : roles) {
-            		intRoles.add(Integer.parseInt(num));
+                    System.out.println(Integer.parseInt(num));
+                    initRoles.add(Integer.parseInt(num));
             	}
             	
-            	myController.passDataForSetUp(names, intRoles);
-            	try {
-					myController.startGameServer();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+            	myController.passDataForSetUp(names, roles);
+//            	try {
+//					myController.startGameServer();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
             	
             	myConnectMenuItem.setDisable(false);
             }

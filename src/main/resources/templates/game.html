@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>One Night Ultimate Werewolf</title>
+    <link rel="stylesheet" href="/main.css" />
+</head>
+<body>
+    <div id="react"></div>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script type="text/babel">
+        var CardComponent = React.createClass({
+            render: function() {
+                return (
+                    <div>
+	                  <img src='/myfolder/myimage.png' onClick={this.imageClick} />
+	               </div>
+                )
+                
+                imageClick = () => {
+	            	console.log('Click!!!!');
+	          	}   
+            }
+        })
+        ReactDOM.render(<CardComponent />, document.querySelector('#react'))
+    </script>
+
+	<div id="start-game-box">
+
+		<h2 align="center">One Night Ultimate Werewolf</h2>
+
+			<table style="width: 90%" id="table-form">
+				<tr>
+					<td><font color="red">* </font>Enter Player Names Separated By Space:</td>
+					<td><input type='text' th:field="*{names}" name='playerName' required></td>
+				</tr>
+				<tr>
+					<td><font color="red">* </font>Enter Characters in Play Separated By Space:</td>
+					<td><input type='number' th:field="*{roles}" name='rolesInPlay' required></td>
+				</tr>
+			</table>
+			<table align="center" cellspacing="20">
+				<tr>
+					<td><input id="signIn" name="addPlayer" class="submit-button"
+						type="submit" value="Start Game"></td>
+					<td><input id="reset" name="reset" class="submit-button"
+						type="reset" value="Reset"></td>
+				</tr>
+			</table>
+	</div>
+	
+	<div class="Image">
+		<img src="">
+	</div>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-package main.java.networking;
+package main.java.players;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import main.java.characters.Characters;
-import main.java.characters.Doppelganger;
 import main.java.frontend.Card;
 
 public class Player extends Thread {

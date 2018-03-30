@@ -1,11 +1,14 @@
 package main.java;
 
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import main.java.frontend.StartGUI;
 
+@SpringBootApplication
 public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
